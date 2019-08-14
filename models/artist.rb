@@ -27,14 +27,13 @@ class Artist
     return artists.map { |artist| Artist.new(artist) }
   end
 
-  def album
+  def albums
     sql = "SELECT * FROM albums
           WHERE artist_id = $1"
     values = [@id]
-    results = Sqlrunner.run(sql, values)
-    album_data = results[0]
-    album = Album.new(album_data)
-    return album
+    array_of_hashes = Sqlrunner.run(sql, values)
+    array_of_album_objects = array_of_hashes.map { |hash| Album.new(hash) }
+    return array_of_album_objects
   end
 
 end

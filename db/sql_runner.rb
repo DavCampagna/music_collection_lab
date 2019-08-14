@@ -6,8 +6,8 @@ class Sqlrunner
 
     begin                                ## try catch - begin, ensure & end - tries to capture all eventualities
       db = PG.connect({dbname: 'music_collection', host: 'localhost'})
-      db.prepare('query', sql)
-      result = db.exec_prepared('query', values)
+      db.prepare('my_query', sql)
+      result = db.exec_prepared('my_query', values)
     ensure
       db.close() if db != nil
     end

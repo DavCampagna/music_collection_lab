@@ -2,6 +2,8 @@ require_relative('./models/album.rb')
 require_relative('./models/artist.rb')
 require('pry')
 
+Album.delete_all()
+Artist.delete_all()
 
 artist1 = Artist.new( { 'name' => 'Tool' } )
 artist1.save()
@@ -12,6 +14,8 @@ artist2.save()
 artist3 = Artist.new( { 'name' => 'Pavarotti' } )
 artist3.save()
 
+artist_without_album = Artist.new({ 'name' => 'some_artist'})
+artist_without_album.save()
 
 album1 = Album.new( {
   'title' => 'Fear Inoculum',

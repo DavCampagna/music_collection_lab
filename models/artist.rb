@@ -36,4 +36,27 @@ class Artist
     return array_of_album_objects
   end
 
+  def delete
+    sql = "DELETE FROM artists WHERE id= $1"
+    values = [@id]
+    Sqlrunner.run(sql, values)
+  end
+
+  def Artist.delete_all
+    sql = "DELETE FROM artists"
+    Sqlrunner.run(sql)
+  end
+
+  def update
+    sql = "
+      UPDATE artists
+      SET name = $1
+      WHERE id = $2
+      RETURNING *
+    "
+   values = [@name, @id]
+   result = Sqlrunner.run(sql, values)
+   updated_artists = Artist.new(result[0])
+   return updated_artists
+  end
 end
